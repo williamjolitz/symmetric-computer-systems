@@ -1,0 +1,6 @@
+#!/bin/sh -v
+mount -r /dev/fd0 /mnt 
+cd /mnt
+/mnt/fdload
+cd /
+umount /dev/fd0

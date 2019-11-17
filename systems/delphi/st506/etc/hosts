@@ -1,0 +1,46 @@
+#
+127.1		localhost
+#
+#	Symmetric Corporate Ethernet: Network 137
+#
+137.0		qa0 scs-en0 en0
+137.1		qa1 scs-en1 en1
+137.2		qa2 scs-en2 en2
+137.3		qa3 scs-en3 en3
+137.4		qa4 scs-en4 en4
+137.5		qa5 scs-en5 en5
+137.6		qa6 scs-en6 en6
+137.7		scs-polyhymnia polyhymnia poly scs-demo demo scs-en7 scs-sales sales en7
+137.8		scs-urania urania clerical scs-admin scs-en8 admin en8 sysload
+137.9		scs-delphi symmetric delphi scs-uucp scs-en9 scs en9
+137.10		scs-clio clio scs-eng scs-rd scs-en10 eng en10
+137.11		qa7 scs-en11 en11
+137.12		qa8 scs-en12 en12
+137.13		qa9 scs-en13 en13
+137.14		kludge scs-kludge scs-en14 en14
+137.15		scs-calliope calliope lady lynne lady-bountiful scs-mfr scs-corporate scs-en15 en15
+137.16		scs-thalia thalia havoc scs-havoc scs-en16 en16
+137.17		scs-euterpe euterpe
+137.18		scs-melpomene melpomene
+137.19		scs-terpsichore terpsichore
+137.20		scs-erato erato
+137.37		testboard1
+137.38		testboard2
+#
+#	SLIP connections:
+#
+#	MFR			Network 135
+135.1		slip-en1
+135.2		slip-eng slip-qa1
+135.3		slip-test
+#	C&L			Network 192
+192.1		cnl-symmetric
+192.2		cnl-reach reach-central
+#	R&D			Network 193
+193.1		slip-havoc
+193.2		slip-eng
+#	ASLIP			Network 194
+194.1		aslip-delphi
+194.2		aslip-havoc
+194.3		aslip-wfj
+194.4		aslip-wlj

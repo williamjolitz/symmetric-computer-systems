@@ -1,0 +1,38 @@
+/bin/hostname `cat /etc/myname`
+# /etc/ifconfig en0 `hostname`
+# /etc/slattach tty3
+# /etc/ifconfig sl0 slip-en1 slip-eng
+/etc/ifconfig lo0 localhost
+/bin/hostid `hostname`
+
+/usr/ucb/strings /vmunix | grep UNIX >/tmp/t1
+grep -v UNIX /etc/motd >>/tmp/t1
+mv /tmp/t1 /etc/motd
+chmod 666 /etc/motd
+
+/etc/savecore /crash				   	>/dev/console 2>&1
+
+echo -n 'starting local daemons:'				>/dev/console
+# syslogd doesn't belong here, but need to be started before the others.
+if [ -f /etc/syslogd ]; then
+	rm -f /dev/log
+	/etc/syslogd & echo -n ' syslogd'			>/dev/console
+fi
+# if [ -f /etc/routed ]; then
+#	/etc/routed;		echo -n ' routed'		>/dev/console
+# fi
+if [ -f /etc/named ]; then
+	/etc/named & echo -n ' named'				>/dev/console
+fi
+if [ -f /etc/timed]; then
+	/etc/timed -M & echo -n ' timed'			>/dev/console
+fi
+if [ -f /usr/lib/sendmail ]; then
+	(cd /usr/spool/mqueue; rm -f lf*)
+	/usr/lib/sendmail -bd -q30m & echo -n ' sendmail'	>/dev/console
+fi
+#/etc/XNSrouted 						>/dev/console
+#/usr/new/lib/xnscourierd					>/dev/console
+				echo '.'			>/dev/console
+
+

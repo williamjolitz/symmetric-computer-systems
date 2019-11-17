@@ -1,0 +1,4 @@
+*.alert;kern.debug;auth.notice			/dev/console
+*.notice;kern.debug;*.err;mail.crit		/usr/adm/messages.syslog
+mail.debug					/usr/spool/mqueue/syslog
+*.alert;kern.debug;auth.notice		@eng

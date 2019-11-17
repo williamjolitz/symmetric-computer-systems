@@ -1,0 +1,325 @@
+#!/bin/csh
+set startingdir=$HOME
+onintr leave
+set filename=""
+setenv PATH	:/usr/ucb:/usr/bin:/usr/local:/bin:/usr/nsc:/usr/games:/etc
+setenv EXINIT	'set noterse prompt magic number '
+setenv SHELL	/bin/csh
+umask 2
+stty tabs
+if( "$TERM" == "dialup" ) then
+	tset -s -Q -e^H -m dialup:\?vt220 >/tmp/xxx$$
+	source /tmp/xxx$$
+else
+	tset -s -Q -e^H >/tmp/xxx$$
+	source /tmp/xxx$$
+endif
+rm /tmp/xxx$$
+
+loop:
+cd $startingdir
+# First make a current menu screen 
+clear
+ul /usr/local/menu.lib/menu.screen
+# Paste on the date
+tgoto 0 21
+date | sed "s/^....//"
+# Remind user of the last file he touched to jog his memory
+if ($filename != "") then
+	tgoto 0 3
+	echo "Last File Used:" $filename
+endif
+# Now get command to do
+tgoto 52 21
+set cmd=$<
+# And dispatch to the appropriate code to do it
+switch ($cmd)
+case A:
+case a:
+	# Use vi as a way to make files for word processing
+	cd wordprocessor
+	clear
+	echo "VI Editor and Wordprocessor"
+	echo "Files that currently exist:"
+	echo "========================================================================"
+ 	ls 
+	echo "========================================================================"
+	echo -n "File to use(or new file name)?:($filename) "
+	set fn=$<
+	if ($fn != "") set filename=$fn
+	if ($filename == "") breaksw
+	vi $filename
+	breaksw 
+case B:
+case b:
+	# Use learn to find out about vi
+	cd wordprocessor
+	clear
+	echo "Learn about VI"
+	learn vi
+	breaksw 
+case c:
+case C:
+	# Use tar to backup word processor files
+	clear
+	echo "Writing a backup of word processor files onto the floppy(or tape)."
+	echo "Files that can be backed up:"
+	echo "========================================================================"
+	cd wordprocessor
+ 	ls 
+	echo "========================================================================"
+	echo "Enter names of files you want to be backed up."
+	echo "If more than one file, seperate the names with blanks."
+	echo -n "If you want all of them backed up, then just type *: "
+	set tbd=$<
+	if ($tbd == "") breaksw 
+	set tbd=`echo $tbd`
+	echo "Files to be backed up:"
+	echo $tbd
+	set tbd=`echo $tbd | sed "s/ /,/g"`
+	echo -n "Place a formatted floppy in the floppy drive and hit return:"
+	set dummy=$<
+	cd $startingdir
+	tar  cvf /dev/rmt1 wordprocessor/{$tbd}
+	if ($status != 0) then
+		echo "Error writing backup (bad floppy?)"
+		echo -n "Hit return to continue:"
+		set dummy=$<
+	endif
+	breaksw ;
+case D:
+case d:
+	# Text formatter for more functionality
+	cd wordprocessor
+	clear
+	echo "NROFF Text formatter and processor"
+	echo "Files that can be formatted:"
+	echo "========================================================================"
+ 	ls 
+	echo "========================================================================"
+	echo -n "File to process?:($filename) "
+	set fn=$<
+	if ($fn != "") set filename=$fn
+	if ($filename == "") breaksw
+	nroff -Tlpr -me $filename | ul | more
+	breaksw
+case E:
+case e:
+	# how to print files
+	cd wordprocessor
+	clear
+	echo "LPR lineprinter output program"
+	echo "Files that can be printed:"
+	echo "========================================================================"
+ 	ls 
+	echo "========================================================================"
+	echo -n "File(s) to print?:($filename) "
+	set fn=$<
+	if ($fn != "") set filename=$fn
+	if ($filename == "") breaksw
+	echo -n "Should the file(s) be nroff'ed before printing(y/n)?:(n) "
+	if ($< == "y") then
+		nroff -Tlpr -me $filename | lpr
+	else
+		lpr $filename
+	endif
+	breaksw
+case I:
+case i:
+	# use the spread sheet
+	cd spreadsheet
+	clear
+	echo "QCALC Spreadsheet: Files that can be used: "
+	echo "========================================================================"
+ 	ls 
+	echo "========================================================================"
+	echo -n "File to use(or new file name)?:($filename) "
+	set fn=$<
+	if ($fn != "") set filename=$fn
+	qcalc $filename
+	breaksw
+case J:
+case j:
+	# use the spread sheet tutor program
+	cd spreadsheet
+	clear
+	echo "Learn QCALC Spreadsheet"
+	qcalc -d /usr/qcalc/demo
+	breaksw
+case k:
+case K:
+	# Use tar to backup spreadsheet files
+	clear
+	echo "Writing a backup of spreadsheet files onto the floppy(or tape)."
+	echo "Files that can be backed up:"
+	echo "========================================================================"
+	cd spreadsheet
+ 	ls 
+	echo "========================================================================"
+	echo "Enter names of files you want to be backed up."
+	echo "If more than one file, seperate the names with blanks."
+	echo -n "If you want all of them backed up, then just type *: "
+	set tbd=$<
+	if ($tbd == "") breaksw 
+	set tbd=`echo $tbd`
+	echo "Files to be backed up:"
+	echo $tbd
+	set tbd=`echo $tbd | sed "s/ /,/g"`
+	echo -n "Place a formatted floppy in the floppy drive and hit return:"
+	set dummy=$<
+	cd $startingdir
+	tar  cvf /dev/rmt1 spreadsheet/{$tbd}
+	if ($status != 0) then
+		echo "Error writing backup (bad floppy?)"
+		echo -n "Hit return to continue:"
+		set dummy=$<
+	endif
+	breaksw ;
+case L:
+case l:
+	# use tip to communicate with another system
+	clear
+	echo "TIP program to communicate with another system"
+	echo "List of possible systems to call:"
+	echo "Name	Description"
+	echo "========================================================================"
+	fgrep "|" /etc/remote | egrep -v "^cu|^tip" | sed "s/|/	/" | sed 's/:.*$//'
+	echo "========================================================================"
+	echo -n "Name to connect to?: "
+	set fn=$<
+	cd communication
+	if ($fn != "") tip $fn
+	breaksw
+case M:
+case m:
+	# use kermit to communicate with another system
+	clear
+	echo "KERMIT program to communicate with another system"
+	cd communication
+	kermit
+	breaksw
+case O:
+case o:
+	# read electronic mail
+	clear
+	echo "MAIL program to read electronic mail."
+	cd communication
+	Mail
+	echo -n "Hit return to continue:"
+	set dummy=$<
+	breaksw
+case P:
+case p:
+	# send electronic mail
+	clear
+	echo "MAIL program to send electronic mail."
+	echo -n "Name to send to?: "
+	set fn=$<
+	cd communication
+	if ($fn != "") then
+		echo "Enter message and end it with a trailing control-d"
+		Mail $fn
+	endif
+	breaksw
+case R:
+case r:
+	# escape to unix via a shell
+	clear
+	echo "CSH program to get to UNIX and other UNIX commands"
+	echo "To return to menu, type menu and return"
+	exec csh
+	echo never occurs
+	breaksw 
+case S:
+case s:
+	# run basic interpreter
+	clear
+	echo "BASIC interpreter"
+	echo "To return to menu, type bye and return"
+	basic
+	breaksw 
+case T:
+case t:
+	# format a floppy
+	clear
+	echo "Format a floppy (FLFORMAT) "
+	echo -n "Insert a floppy and hit return to continue:"
+	set dummy=$<
+	/etc/flformat
+	echo -n "Hit return to continue:"
+	set dummy=$<
+	breaksw
+case U:
+case u:
+	# check hard disk
+	clear
+	echo "Check internal hard disk"
+	sync
+	sleep 3
+	fsck -n -p
+	echo -n "Hit return to continue:"
+	set dummy=$<
+	breaksw
+case V:
+case v:
+	# restore a backup
+	clear
+	echo "Restore from file backup."
+	echo "This can overwrite the following files:"
+	tar tf /dev/rmt1
+	if($status != 0) then
+		echo "Errors found on floppy (is this a good diskette?)"
+		tar xvf /dev/rmt1
+	endif
+	echo -n "Hit return to continue and restore these files:"
+	set dummy=$<
+	breaksw
+case W:
+case w:
+	# copy a floppy
+	clear
+	echo "copy a floppy disk"
+	cpfd
+	breaksw
+case X:
+case x:
+	# show all files on hard disk (within menu system)
+	clear
+	echo "Show all files on hard disk with LS"
+	ls -l communication database spreadsheet wordprocessor | more
+	echo -n "Hit return to continue:"
+	set dummy=$<
+	breaksw
+case Y:
+case y:
+	# list contents of floppy
+	clear
+	echo "Show all files on floppy with TAR"
+	tar tvf /dev/rmt1 | more
+	echo -n "Hit return to continue:"
+	set dummy=$<
+	breaksw
+case Z:
+case z:
+	# change date and time
+	clear
+	echo "Change date and time"
+	echo -n "Current date is: "
+	date
+	echo -n "Enter year (yy): "
+	set yy=$<
+	set yy=`/usr/local/menu.lib/pr2 $yy`
+	echo -n "Enter month (mm): "
+	set mo=$<
+	set mo=`/usr/local/menu.lib/pr2 $mo`
+	echo -n "Enter day (dd): "
+	set dd=$<
+	set dd=`/usr/local/menu.lib/pr2 $dd`
+	echo -n "Enter hour (hh): "
+	set hh=$<
+	set hh=`/usr/local/menu.lib/pr2 $hh`
+	echo -n "Enter minutes (mm): "
+	set mm=$<
+	set mm=`/usr/local/menu.lib/pr2 $mm`
+	/usr/local/menu.lib/date $yy$mo$dd$hh$mm
+	echo -n "Current date n

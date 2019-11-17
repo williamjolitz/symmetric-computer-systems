@@ -1,0 +1,38 @@
+tty3a|raw tty3 at 1200 baud:\
+	:dv=/dev/tty3:br#1200:el=^U^C^S^Q^D:ie=%$:oe=^D:
+tty3|raw tty3 at 9600 baud:\
+	:dv=/dev/tty3:br#9600:el=^U^C^S^Q^D:ie=%$:oe=^D:ta:
+wlj|Bill's parents in san jose:\
+	:pn=4082572890:tc=UNIX-1200:
+ernie|DEC VAX-11/785:\
+	:pn=6428831:tc=UNIX-1200:
+ernie2|DEC VAX-11/785:\
+	:pn=6428821:tc=UNIX-1200:
+tip0|tip1200:tc=UNIX-1200:
+tip300:tc=UNIX-300:
+cu0|cu300:tc=UNIX-300:
+cu1200:tc=UNIX-1200:
+UNIX-300:\
+	:dv=/dev/tty3:el=^D^U^C^S^Q^O@:du:at=hayes:ie=#$%:oe=^D:br#300:
+UNIX-1200:\
+	:dv=/dev/tty3:el=^D^U^C^S^Q^O@:du:at=hayes:\
+	:ie=#$%:oe=^D:br#1200:
+UNIX-2400:\
+	:dv=/dev/tty3:el=^D^U^C^S^Q^O@:du:at=hayes:\
+	:ie=#$%:oe=^D:br#2400:
+--------------------------------------------------------------------
+The attributes are:
+
+dv	device to use for the tty
+el	EOL marks (default is NULL)
+du	make a call flag (dial up)
+pn	phone numbers (@ =>'s search phones file; possibly taken from
+			      PHONES environment variable)
+at	ACU type
+ie	input EOF marks	(default is NULL)
+oe	output EOF string (default is NULL)
+cu	call unit (default is dv)
+br	baud rate (defaults to 300)
+fs	frame size (default is BUFSIZ) -- used in buffering writes
+	  on receive operations
+tc	to continue a capability

@@ -1,0 +1,213 @@
+# /etc/disktab:	This file contains various disk descriptions sutible
+#		for use with the 375.
+#
+#		To make one of these, describe the disk shape and
+#		size with the first line (e.g. name, type, sector
+#		size, number of tracks, sectors, cylinders. Then
+#		create a partition table, where the root is partition a,
+#		the paging area is b, and /usr is on h.
+#
+#		Partition c is used to cover the whole drive (including badblock
+#		table), and partition g is usually used to hold an optional
+#		mini root filesystem. Partition sizes are in units of sectors,
+#		not in any block size, and offsets are in units of cylinders.
+#
+#		Bad block forwarding takes up the last 126 sectors and 1 track,
+#		so the last few cylinders are not used in any filesystem
+#		for this reason.
+q280|quantum280|Quantum Q280:ty=scsi:se#512:ns#156252:sc#190:nt#10:\
+	:pa#15960:oa#0:\
+	:pb#15960:ob#84:\
+        :pc#156252:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#124332:oh#168:	
+mk156|toshiba156|Toshiba MK156 156Mb:ty=scsi:se#512:ns#288750:sc#350:nt#10:bm:\
+	:pa#15750:oa#0:ba#4096:fa#512:\
+	:pb#15750:ob#45:ba#4096:fa#512:\
+        :pc#288750:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#257250:oh#90:ba#4096:fa#512:	
+cfa270s|Connor Peripherals 250Mb:ty=scsi:nc#1182:se#512:ns#149:sc#447:nt#3:rm#5400:bm:\
+	:pa#15645:oa#0:ba#4096:fa#512:\
+	:pb#15645:ob#35:ba#4096:fa#512:\
+        :pc#528354:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#497064:oh#70:ba#4096:fa#512:	
+lynnescribe|Lynne's Miniscribe 85Mb:ty=st506:se#1024:nt#8:ns#9:nc#1024:\
+	:pa#26496:oa#0:		# active / and /usr \
+	:pb#2016:ob#368:	# small swap space \
+        :pc#73728:oc#0:\
+	:pd#4032:od#396:	# distribution root \
+	:pe#23976:oe#452:	# distribution usr \
+	:pf#11952:of#785:	# distribution emacs\
+	:pg#4032:og#951:	# distribution ingres \
+	:ph#1152:oh#1006:	# spare tiny filesystem
+miniscribe85|Miniscribe 6085 85Mb:ty=st506:se#1024:nt#8:ns#9:nc#1024:\
+	:pa#9792:oa#0:\
+	:pb#4320:ob#136:\
+        :pc#73728:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#59400:oh#196:
+seagate51|Seagate ST251 51Mb:ty=st506:se#1024:nt#6:ns#9:nc#820:\
+	:pa#5022:oa#0:\
+	:pb#4752:ob#93:\
+	:pc#44280:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#1009:\
+        :ph#34290:oh#181:
+seagate96s|Seagate ST4096 96Mb:ty=st506:se#1024:nt#9:ns#9:nc#1024:\
+	:pa#6075:oa#0:\
+	:pb#6075:ob#75:\
+	:pc#82944:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#1009:\
+        :ph#70551:oh#150:
+cdc86:CDC94155-86Mb:ty=st506:se#1024:nt#10:ns#9:nc#830:\
+	:pa#10080:oa#0:\
+	:pb#4050:ob#112:\
+	:pc#74700:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#60300:oh#157:
+seagate50|Seagate 51Mb:ty=st506:se#1024:nt#5:ns#9:nc#977:\
+	:pa#4995:oa#0:\
+	:pb#4005:ob#111:\
+	:pc#43965:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#34830:oh#200:
+nec50|Nec 50Mb|D5146:ty=st506:se#1024:nt#8:ns#9:nc#615:\
+        :pa#5040:oa#0:\
+        :pb#4752:ob#70:\
+	:pc#44280:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#34272:oh#136:
+toshiba86s|Special Toshiba 86MB|MK56FA:ty=st506:se#1024:nt#10:ns#9:nc#830:\
+	:pa#10080:oa#0:\
+	:pb#4050:ob#112:         # Smaller paging area\
+	:pc#74700:oc#0:\
+	:pd#0:od#0:pe#0:oe#0:pf#0:of#0:\
+	:pg#810:og#818:          # mini-root\
+	:ph#59490:oh#157:        # bigger usr file system
+toshiba86|Toshiba 86Mb|MK56FA:ty=st506:se#1024:nt#10:ns#9:nc#830:\
+	:pa#10080:oa#0:\
+	:pb#7020:ob#112:\
+	:pc#74700:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#810:og#818:		# mini-root\
+	:ph#56520:oh#190:
+fuji86|Fujitsu 86Mb|M2243AS:ty=st506:se#1024:nt#11:ns#9:nc#754:\
+	:pa#10098:oa#0:\
+	:pb#7128:ob#102:\
+	:pc#74646:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#56430:oh#183:
+maxtor|Maxtor 140Mb:ty=st506:se#1024:nt#15:ns#9:nc#918:\
+	:pa#7425:oa#0:\
+	:pb#16065:ob#55:\
+	:pc#123920:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#100035:oh#174:
+vertex|Vertex 50Mb:ty=st506:se#1024:nt#5:ns#9:nc#987:wp#1023:\
+	:pa#5670:oa#0:\
+	:pb#4050:ob#126:\
+	:pc#44415:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#1035:og#958:\
+	:ph#33390:oh#216:
+atasi|Atasi 46Mb:ty=st506:se#1024:nt#7:ns#9:nc#645:wp#545:\
+	:pa#4914:oa#0:\
+	:pb#4095:ob#78:\
+	:pc#40635:oc#0:\
+	:pd#0:od#0:\
+	:pe#4914:oe#565:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#26586:oh#143:
+# Rodime with extra large h partition and no e partition
+rodime|Rodime 208 53Mb:ty=st506:se#1024:nt#8:ns#9:nc#640:wp#0:\
+	:pa#5184:oa#0:\
+	:pb#5184:ob#72:\
+	:pc#46080:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#35568:oh#144:
+# Rodime with spare mini-root file system, smaller usr file system
+erodime:ty=st506:se#1024:nt#8:ns#9:nc#640:wp#0:\
+	:pa#5184:oa#0:\
+	:pb#5184:ob#72:\
+	:pc#46080:oc#0:\
+	:pd#45864:od#1:\
+	:pe#5184:oe#566:\
+	:pf#0:of#0:\
+	:pg#1008:og#624:\
+	:ph#34560:oh#144:
+microsci|msci|microscience|Microscience 10Mb:ty=st506:\
+	:se#1024:nt#4:ns#9:nc#306:wp#1024:\
+	:pa#4932:oa#0:\
+	:pb#1008:ob#137:\
+	:pc#11016:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#4968:oh#165:
+tulin|tul|tl240|Tulin 31Mb:ty=st506:\
+	:se#1024:nt#6:ns#9:nc#640:wp#1024:\
+	:pa#4320:oa#0:\
+	:pb#1080:ob#80:\
+	:pc#34560:oc#0:\
+	:pd#0:od#0:\
+	:pe#0:oe#0:\
+	:pf#0:of#0:\
+	:pg#0:og#0:\
+	:ph#29106:oh#100:
+syquest|syq|Syquest 5Mb removeable:ty=st506:\
+	:se#1024:nt#2:ns#9:nc#306:wp#306:\
+	:pa#5508:oa#0:\
+	:pb#5508:ob#0:\
+	:pc#5508:oc#0:
+floppy|floppy5|80-track floppy with 5-1024 byte sectors:ty=floppy:\
+	:se#1024:nt#2:ns#5:nc#80:rm#300:\
+	:pa#800:oa#0:\
+	:pc#800:oc#0:
+floppy9|80-track floppy with 9-512 byte sectors:ty=floppy:\
+	:se#512:nt#2:ns#9:nc#80:rm#360:
+floppy8|80-track floppy with 8-512 byte sectors:ty=floppy:\
+	:se#512:nt#2:ns#8:nc#80:rm#360:
+cipher|Cipher FloppyTape:ty=floppy:se#1024:nt#6:ns#17:nc#252:

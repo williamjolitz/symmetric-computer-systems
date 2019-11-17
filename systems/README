@@ -1,0 +1,11 @@
+Each system recovered had different contents and hasn't been consolidated into a master (yet).
+As the drives public contents are recovered, these file trees will be added/annotated.
+
+Then selected superset of these will become a master for the systems as a whole.
+
+Many different systems (VMC, 375, LMC, GVC, ...) were ported/developed, including unique ones,
+
+Most of the remaining system units had a single ST506 drive, thus the st506 directory of each of
+these corresponds to the public contents (there are other contents as well) of each drive.
+
+Additional files amount to other details of such units as desired.

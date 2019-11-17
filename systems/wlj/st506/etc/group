@@ -1,0 +1,13 @@
+wheel:*:0:root,bill
+daemon:*:1:daemon
+kmem:*:2:root,bill
+tty:*:4:
+staff:*:10:root,bill
+admin:*:15:root,bill
+source:*:11:
+src:*:11:
+dialer:*:22:root
+operator:*:28:root,bill
+mail:*:77:bill
+guest:*:90:bill
+news:*:100:bill

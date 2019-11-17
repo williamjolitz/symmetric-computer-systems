@@ -1,0 +1,135 @@
+umask 77
+
+for i do
+case $i in
+standard)
+	mknod console c 0 0
+	mknod tty1 c 0 1
+	mknod tty2 c 0 2
+	mknod tty3 c 0 3
+	umask 22
+	mknod mem c 1 0
+	mknod kmem c 1 1
+	umask 0
+	mknod null c 1 2
+	mknod tty c 3 0
+	mknod lp c 6 20
+	umask 77
+	;;
+wd0)
+	rm -f wd0? rwd0?
+	mknod wd0a b 0 0
+	mknod wd0b b 0 1
+	mknod wd0c b 0 2
+	mknod wd0d b 0 3
+	mknod wd0e b 0 4
+	mknod wd0f b 0 5
+	mknod wd0g b 0 6
+	mknod wd0h b 0 7
+	mknod rwd0a c 2 0
+	mknod rwd0b c 2 1
+	mknod rwd0c c 2 2
+	mknod rwd0d c 2 3
+	mknod rwd0e c 2 4
+	mknod rwd0f c 2 5
+	mknod rwd0g c 2 6
+	mknod rwd0h c 2 7
+	;;
+wd1)
+	rm -f wd1? rwd1?
+	mknod wd1a b 0 8
+	mknod wd1b b 0 9
+	mknod wd1c b 0 10
+	mknod wd1d b 0 11
+	mknod wd1e b 0 12
+	mknod wd1f b 0 13
+	mknod wd1g b 0 14
+	mknod wd1h b 0 15
+	mknod rwd1a c 2 8
+	mknod rwd1b c 2 9
+	mknod rwd1c c 2 10
+	mknod rwd1d c 2 11
+	mknod rwd1e c 2 12
+	mknod rwd1f c 2 13
+	mknod rwd1g c 2 14
+	mknod rwd1h c 2 15
+	;;
+fd0)
+	rm -f fd*0 rfd*0
+	umask 0
+	mknod fd0 b 0 24
+	mknod rfd0 c 2 24
+	mknod fdb0 b 0 25
+	mknod rfdb0 c 2 25
+	mknod fdc0 b 0 26
+	mknod rfdc0 c 2 26
+	mknod fdd0 b 0 27
+	mknod rfdd0 c 2 27
+	mknod fde0 b 0 28
+	mknod rfde0 c 2 28
+	mknod fdf0 b 0 29
+	mknod rfdf0 c 2 29
+	mknod fdg0 b 0 30
+	mknod rfdg0 c 2 30
+	mknod fdh0 b 0 31
+	mknod rfdh0 c 2 31
+	mknod fdE0 b 0 156
+	mknod rfdE0 c 2 156
+	mknod fdF0 b 0 157
+	mknod rfdF0 c 2 157
+	mknod fdG0 b 0 158
+	mknod rfdG0 c 2 158
+	mknod fdH0 b 0 159
+	mknod rfdH0 c 2 159
+	ln -s rfd0 rmt8
+	umask 77
+	;;
+fd1)
+	rm -f fd*1 rfd*1
+	umask 0
+	mknod fd1 b 0 32
+	mknod rfd1 c 2 32
+	mknod fdb1 b 0 33
+	mknod rfdb1 c 2 33
+	mknod fdc1 b 0 34
+	mknod rfdc1 c 2 34
+	mknod fdd1 b 0 35
+	mknod rfdd1 c 2 35
+	mknod fde1 b 0 36
+	mknod rfde1 c 2 36
+	mknod fdf1 b 0 37
+	mknod rfdf1 c 2 37
+	mknod fdg1 b 0 38
+	mknod rfdg1 c 2 38
+	mknod fdh1 b 0 39
+	mknod rfdh1 c 2 39
+	mknod fdE1 b 0 164
+	mknod rfdE1 c 2 164
+	mknod fdF1 b 0 165
+	mknod rfdF1 c 2 165
+	mknod fdG1 b 0 166
+	mknod rfdG1 c 2 166
+	mknod fdH1 b 0 167
+	mknod rfdH1 c 2 167
+	umask 77
+	;;
+pty0)
+	for i in 0 1 2 3 4 5 6 7 8 9
+	do
+		mknod ttyp$i c 4 $i
+		mknod ptyp$i c 5 $i
+	done
+	;;
+scsi)
+	mknod rcst2 c 8 2
+	mknod rrmt3 c 9 3
+	mknod swd7a b 3 56
+	mknod swd7b b 3 57
+	mknod swd7c b 3 58
+	mknod swd7h b 3 63
+	mknod rswd7a c 10 56
+	mknod rswd7b c 10 57
+	mknod rswd7c c 10 58
+	;;
+esac
+done

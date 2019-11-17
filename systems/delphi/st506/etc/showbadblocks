@@ -1,0 +1,8 @@
+#!/bin/sh
+for m in wd0a wd0h
+do
+	b=`bad144 $m`
+	i=`icheck -bn $b $m`
+	echo "Files on "$m" overlaying current bad blocks"
+	ncheck -i $i $m
+done

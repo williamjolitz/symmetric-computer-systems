@@ -1,0 +1,9 @@
+#
+lp|local line printer:\
+	:lp=/dev/lp:sd=/usr/spool/lpd:lf=/usr/adm/lpd-errs:\
+	:sh:cr:pl#66:pw#80:if=/usr/lib/lpf:
+#
+# daisy remote printer on admin
+admin|admin line printer:\
+	:lp=:rm=scs-admin:sd=/usr/spool/adminlpd:lf=/usr/adm/lpd-errs:
+#

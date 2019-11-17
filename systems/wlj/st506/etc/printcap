@@ -1,0 +1,18 @@
+#
+lp|local line printer:\
+	:sh:pl#66:pw#200:lp=/dev/lp:sd=/usr/spool/lpd:lf=/usr/adm/lpd-errs:\
+	:cr:if=/usr/lib/ost:
+#	:cr:if=/usr/lib/lpf:
+
+#olp|local line printer:\
+#	:li#66:co#80:lp=/dev/lp:sd=/usr/spool/lpd:lf=/usr/adm/lpd-errs:\
+#	:cr:if=/usr/lib/ost:
+
+cat|Toshiba:\
+	:sh:lp=/dev/lp:sd=/usr/spool/toshibalpd:mx#2000:pl#66:px#1440:py#1980:\
+	:tf=/usr/lib/toshibacat:lf=/dev/console:
+#
+# daisy remote printer on othersys
+# othersys|othersys line printer:\
+# 	:lp=:rp=lp:rm=othersys:sd=/usr/spool/othersyslpd:lf=/usr/adm/lpd-errs:
+# #

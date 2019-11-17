@@ -1,0 +1,3 @@
+#!/bin/sh
+cd  /usr/spool/toshibad
+/usr/lib/cat $@ -X180 -Y180 | /usr/lib/t180

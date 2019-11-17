@@ -1,0 +1,8 @@
+#
+# name	getty			type		status		#comments
+#
+console	"/etc/getty std.9600"	h19		on secure
+tty1	"/etc/getty std.9600"	h19		on
+tty2	"/etc/getty std.9600"	h19		on
+tty3	"/etc/getty std.1200"	dialup		on
+ttyp0	"/etc/getty std.9600"	unknown		off secure

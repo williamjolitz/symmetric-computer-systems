@@ -1,0 +1,23 @@
+#!/bin/sh
+# zero (e.g. clear) files in preparation for a ship
+# should be run single-user (or in such a way that sccting is off)
+mount -a
+# files from /usr
+cat >/usr/adm/acct </dev/null
+cat >/usr/adm/aculog </dev/null
+cat >/usr/adm/lastlog </dev/null
+cat >/usr/adm/lpd-errs </dev/null
+cat >/usr/adm/messages </dev/null
+cat >/usr/adm/msgbuf </dev/null
+cat >/usr/adm/shutdownlog </dev/null
+cat >/usr/adm/wtmp </dev/null
+rm -f /usr/man/cat?/*
+rm -rf /usr/crash/*
+rm -rf /usr/preserve/*
+rm -rf /usr/spool/rwho/* /usr/spool/lpd/* /usr/spool/mail/*
+cat >/usr/spool/mqueue/syslog </dev/null
+find / -name core -exec rm {} \;
+umount -a
+# files from root
+cat >/etc/mtab </dev/null
+cat >/etc/utmp </dev/null
